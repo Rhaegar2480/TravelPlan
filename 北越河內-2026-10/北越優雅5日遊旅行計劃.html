@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>芬達旅遊 - 北越優雅 5 日遊（下龍灣奢華日遊船、陸龍灣舟遊、河內古街）</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root {
+    --primary: #0EA5E9;
+    --primary-dark: #0284C7;
+    --primary-light: #E0F2FE;
+    --primary-50: #F0F9FF;
+    --accent: #F97316;
+    --accent-dark: #EA580C;
+    --accent-light: #FFF7ED;
+    --success: #10B981;
+    --success-light: #D1FAE5;
+    --rose: #F43F5E;
+    --rose-light: #FFF1F2;
+    --violet: #8B5CF6;
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --text: #0C4A6E;
+    --text-body: #334155;
+    --text-muted: #64748B;
+    --border: #E2E8F0;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 28px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.04);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --transition: 200ms ease-out;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text-body); line-height: 1.65; -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 980px; margin: 0 auto; padding: 24px 20px 48px; }
+
+  /* ---- SVG Icon System ---- */
+  .icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; flex-shrink: 0;
+  }
+  .icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .icon-sm { width: 16px; height: 16px; }
+  .icon-lg { width: 24px; height: 24px; }
+
+  /* ---- Hero ---- */
+  .hero {
+    position: relative; border-radius: var(--radius); padding: 56px 44px 48px;
+    margin-bottom: 36px; overflow: hidden; color: white;
+    background: linear-gradient(135deg, #0EA5E9 0%, #6366F1 50%, #8B5CF6 100%);
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 20% 80%, rgba(249,115,22,0.2) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 500px at 80% 20%, rgba(139,92,246,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 300px 300px at 60% 60%, rgba(255,255,255,0.06) 0%, transparent 50%);
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero h1 { font-size: 2.1rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; line-height: 1.2; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.92rem; opacity: 0.92; }
+  .hero-meta-item { display: flex; align-items: center; gap: 7px; }
+  .hero-meta-item .icon { color: rgba(255,255,255,0.85); }
+  .hero-orb {
+    position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.12; pointer-events: none;
+    animation: orbFloat 10s ease-in-out infinite alternate;
+  }
+  .hero-orb-1 { width: 300px; height: 300px; background: #F97316; top: -80px; right: -60px; }
+  .hero-orb-2 { width: 200px; height: 200px; background: #38BDF8; bottom: -60px; left: -40px; animation-delay: -5s; }
+
+  @keyframes orbFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(20px, -15px) scale(1.1); }
+  }
+
+  /* ---- Section Nav ---- */
+  .section-nav {
+    display: flex; gap: 8px; margin-bottom: 32px; overflow-x: auto;
+    padding-bottom: 4px; -webkit-overflow-scrolling: touch;
+  }
+  .section-nav::-webkit-scrollbar { height: 0; }
+  .nav-pill {
+    display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
+    border-radius: 99px; font-size: 0.85rem; font-weight: 500; white-space: nowrap;
+    background: var(--card); border: 1px solid var(--border); color: var(--text-muted);
+    cursor: pointer; transition: all var(--transition); text-decoration: none;
+  }
+  .nav-pill:hover { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+  .nav-pill.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 2px 6px rgba(14,165,233,0.3); }
+  .nav-pill .icon { width: 16px; height: 16px; }
+
+  /* ---- Section ---- */
+  .section { margin-bottom: 40px; scroll-margin-top: 20px; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .section-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: var(--radius-sm);
+    background: var(--primary-light); color: var(--primary);
+  }
+  .section-title { font-size: 1.2rem; font-weight: 700; color: var(--text); }
+
+  /* ---- Weather ---- */
+  .weather-bar { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+  .weather-bar::-webkit-scrollbar { height: 4px; }
+  .weather-bar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+  .weather-card {
+    flex: 0 0 auto; min-width: 108px; background: var(--card); border-radius: var(--radius-sm);
+    padding: 14px 12px; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+    transition: all var(--transition);
+  }
+  .weather-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .weather-card .w-date { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+  .weather-card .w-icon { font-size: 28px; line-height: 1; margin: 4px 0 8px; }
+  .weather-card .w-icon svg { width: 32px; height: 32px; }
+  .weather-card .w-temp { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+  .weather-card .w-temp-low { color: var(--text-muted); font-weight: 400; }
+  .weather-tip {
+    display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; padding: 14px 18px;
+    background: var(--primary-50); border: 1px solid #BAE6FD; border-radius: var(--radius-sm); font-size: 0.88rem; color: var(--primary-dark);
+  }
+  .weather-tip .icon { flex-shrink: 0; margin-top: 1px; }
+
+  /* ---- Day Card ---- */
+  .day-card {
+    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    border: 1px solid var(--border); margin-bottom: 16px; overflow: hidden;
+    transition: box-shadow var(--transition);
+  }
+  .day-card:hover { box-shadow: var(--shadow-md); }
+  .day-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 22px; cursor: pointer; user-select: none;
+    transition: background var(--transition);
+  }
+  .day-header:hover { background: var(--primary-50); }
+  .day-header:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+  .day-num {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--primary), var(--violet));
+    color: white; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; margin-right: 14px;
+  }
+  .day-header-left { display: flex; align-items: center; }
+  .day-header-info h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .day-header-info .day-meta { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; display: flex; align-items: center; gap: 6px; }
+  .day-header .toggle-icon {
+    width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: var(--bg); color: var(--text-muted); transition: all var(--transition);
+  }
+  .day-card.collapsed .toggle-icon { transform: rotate(-90deg); }
+  .day-body {
+    padding: 4px 22px 22px; border-top: 1px solid var(--border);
+    max-height: 3000px; overflow: hidden; transition: max-height 0.35s ease-out, padding 0.35s ease-out;
+  }
+  .day-card.collapsed .day-body { max-height: 0; padding-top: 0; padding-bottom: 0; border-top-color: transparent; }
+
+  /* ---- Timeline ---- */
+  .timeline { position: relative; padding-left: 32px; padding-top: 18px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 10px; top: 24px; bottom: 12px;
+    width: 2px; background: linear-gradient(to bottom, var(--primary), var(--border));
+    border-radius: 2px;
+  }
+  .tl-item { position: relative; margin-bottom: 22px; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot {
+    position: absolute; left: -28px; top: 4px; width: 14px; height: 14px;
+    border-radius: 50%; border: 2.5px solid var(--primary); background: white; z-index: 1;
+    box-shadow: 0 0 0 3px var(--primary-light);
+  }
+  .tl-item.is-meal .tl-dot { border-color: var(--accent); background: var(--accent-light); box-shadow: 0 0 0 3px var(--accent-light); }
+  .tl-time { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 3px; }
+  .tl-content h4 { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .tl-content p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+  .tl-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.73rem; padding: 3px 10px; border-radius: 99px; font-weight: 500;
+  }
+  .tag-cost { background: var(--accent-light); color: var(--accent-dark); }
+  .tag-transport { background: var(--success-light); color: #047857; }
+  .tag-free { background: var(--primary-light); color: var(--primary-dark); }
+
+  /* ---- Meal Card ---- */
+  .meal-card {
+    display: flex; align-items: center; gap: 14px; padding: 12px 16px;
+    background: linear-gradient(135deg, #FFF7ED, #FFFBEB); border: 1px solid #FED7AA;
+    border-radius: var(--radius-sm); margin-top: 6px;
+  }
+  .meal-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: white; display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-sm); color: var(--accent); flex-shrink: 0;
+  }
+  .meal-info { flex: 1; min-width: 0; }
+  .meal-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+  .meal-detail { font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .meal-price { font-weight: 700; color: var(--accent-dark); white-space: nowrap; font-size: 0.95rem; }
+
+  /* ---- Hotels ---- */
+  .hotel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .hotel-card {
+    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    border: 1px solid var(--border); padding: 22px; position: relative;
+    cursor: default; transition: all var(--transition);
+  }
+  .hotel-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+  .hotel-badge {
+    position: absolute; top: 14px; right: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--violet));
+    color: white; font-size: 0.72rem; font-weight: 600;
+    padding: 3px 12px; border-radius: 99px;
+  }
+  .hotel-name { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 6px; padding-right: 60px; }
+  .hotel-area { display: flex; align-items: center; gap: 5px; font-size: 0.83rem; color: var(--text-muted); margin-bottom: 12px; }
+  .hotel-price-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 12px; }
+  .hotel-price { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+  .hotel-price-unit { font-size: 0.8rem; color: var(--text-muted); }
+  .hotel-highlights { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+  .hotel-tag { display: inline-block; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; background: var(--primary-light); color: var(--primary-dark); margin-right: 4px; margin-bottom: 4px; }
+
+  /* ---- Budget ---- */
+  .budget-wrapper {
+    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    border: 1px solid var(--border); overflow: hidden;
+  }
+  .budget-chart { display: flex; height: 8px; overflow: hidden; }
+  .budget-chart-seg { transition: width 0.6s ease-out; }
+  .budget-table { width: 100%; border-collapse: collapse; }
+  .budget-table th, .budget-table td { padding: 12px 18px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+  .budget-table th { background: var(--bg); color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  .budget-table .cat-row td { font-weight: 600; color: var(--text); background: var(--primary-50); }
+  .budget-table .cat-row .cat-icon { display: inline-flex; align-items: center; gap: 8px; }
+  .budget-table .cat-row .cat-icon .icon { color: var(--primary); }
+  .budget-table .sub-row td { color: var(--text-muted); padding-left: 48px; }
+  .budget-table .subtotal { text-align: right; font-weight: 600; color: var(--primary); }
+  .budget-table td:last-child { text-align: right; }
+
+  .budget-total {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 24px;
+    background: linear-gradient(135deg, #0EA5E9 0%, #6366F1 50%, #8B5CF6 100%);
+    border-radius: var(--radius); color: white; margin-top: 16px;
+  }
+  .budget-total-label { font-size: 0.95rem; font-weight: 500; opacity: 0.9; }
+  .budget-total-per { font-size: 0.85rem; opacity: 0.75; margin-top: 2px; }
+  .budget-total-amount { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; }
+
+  /* ---- Tips ---- */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .tip-card {
+    display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px;
+    background: var(--accent-light); border: 1px solid #FED7AA; border-radius: var(--radius-sm);
+    font-size: 0.88rem; color: var(--text-body);
+  }
+  .tip-icon {
+    width: 28px; height: 28px; border-radius: 8px; background: white;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-sm); color: var(--accent); flex-shrink: 0;
+  }
+  .tip-icon .icon { width: 14px; height: 14px; }
+
+  /* ---- Footer ---- */
+  .footer { text-align: center; padding: 28px 20px; color: var(--text-muted); font-size: 0.78rem; margin-top: 20px; }
+  .footer-line { width: 48px; height: 3px; background: linear-gradient(90deg, var(--primary), var(--violet)); border-radius: 99px; margin: 0 auto 12px; }
+
+  /* ---- Print ---- */
+  @media print {
+    body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .container { padding: 0; max-width: 100%; }
+    .hero { break-inside: avoid; }
+    .day-card { break-inside: avoid; }
+    .day-card.collapsed .day-body { max-height: none !important; padding: 4px 22px 22px !important; border-top: 1px solid var(--border) !important; }
+    .toggle-icon, .section-nav { display: none !important; }
+    .hotel-card:hover, .weather-card:hover, .day-card:hover { transform: none; box-shadow: var(--shadow); }
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .container { padding: 16px 14px 32px; }
+    .hero { padding: 36px 24px 32px; }
+    .hero h1 { font-size: 1.55rem; }
+    .hero-meta { gap: 12px; font-size: 0.85rem; }
+    .day-header { padding: 14px 16px; }
+    .day-num { width: 34px; height: 34px; font-size: 0.78rem; margin-right: 10px; }
+    .day-body { padding: 4px 16px 16px; }
+    .timeline { padding-left: 26px; }
+    .hotel-grid { grid-template-columns: 1fr; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .budget-total { flex-direction: column; text-align: center; gap: 8px; padding: 18px; }
+    .section-nav { gap: 6px; }
+    .nav-pill { padding: 6px 12px; font-size: 0.8rem; }
+  }
+
+  /* ---- Focus ---- */
+  :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+
+  /* ---- Fixed Top Box Header ---- */
+  .fixed-top-box {
+    position: sticky; top: 0; z-index: 1000;
+    background: var(--bg); padding: 12px 0 16px;
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06); margin-bottom: 28px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Fixed Top Header (Red Box Area: Meta Banner + Day Navigation + Map Pinned at Top) -->
+  <div class="fixed-top-box">
+    <div class="hero" role="banner" style="padding: 16px 24px; margin-bottom: 12px;">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-content">
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+            <span id="heroDate">2026-10-08 ~ 2026-10-12</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <span id="heroTravelers">團體行程 (領隊許佳真小姐 0958-777-263)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day Navigation Bar -->
+    <nav class="section-nav" id="dayNavPills" aria-label="每日行程導航" style="margin-bottom: 12px;"></nav>
+
+    <!-- Map -->
+    <div id="sec-map">
+      <div id="map" style="height: 320px; width: 100%; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); z-index: 1;"></div>
+    </div>
+  </div>
+
+  <!-- Daily Itinerary -->
+  <div class="section" id="sec-days">
+    <div class="section-header">
+      <div class="section-icon"><span class="icon icon-lg"><svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></span></div>
+      <h2 class="section-title">每日行程</h2>
+    </div>
+    <div id="daysContainer"></div>
+  </div>
+
+  <!-- Tips -->
+  <div class="section" id="sec-tips">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--rose-light);color:var(--rose);"><span class="icon icon-lg"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+      <h2 class="section-title">实用贴士</h2>
+    </div>
+    <div class="tips-grid" id="tipsList"></div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-line"></div>
+    <p>由 AI 生成 · 价格与信息仅供参考，请以实际为准 · 2026-09-29</p>
+  </footer>
+
+</div>
+
+<script>
+const tripData = {
+  "title": "芬達旅遊 - 北越優雅 5 日遊（下龍灣奢華日遊船、陸龍灣舟遊、河內古街）",
+  "dateRange": "2026-10-08 ~ 2026-10-12",
+  "travelers": "團體行程 (領隊許佳真小姐 0958-777-263)",
+  "weather": {
+    "summary": "10月初北越(河內/下龍灣)秋季，氣溫約 22-29°C，秋高氣爽適合旅遊",
+    "avgHigh": 29,
+    "avgLow": 22,
+    "rainfall": "20%",
+    "clothing": "短袖/薄長袖 + 薄外套 (特定景點需注重穿著規範)",
+    "tips": "參觀巴亭廣場、胡志明陵寢、鎮國寺等景點時不可穿著短褲、短裙或無袖上衣"
+  },
+  "days": [
+    {
+      "date": "10/08",
+      "weekday": "週四",
+      "theme": "桃園出發 → 河內西湖古剎 & 百年舊鐵道巡禮",
+      "weather": {
+        "icon": "sunny",
+        "high": 29,
+        "low": 22
+      },
+      "activities": [
+        {
+          "time": "06:00",
+          "name": "桃園機場第1航廈華航櫃檯集合",
+          "duration": "2.5h",
+          "cost": 0,
+          "transport": "中華航空 CI 791 (08:20-10:30)",
+          "note": "隨團領隊許佳真小姐（手機：0958-777-263）。搭乘華航豪華客機飛往越南首都河內。河內市自古即為越南李朝首都，名為昇龍城，保存約8000棟法式殖民建築。"
+        },
+        {
+          "time": "10:30",
+          "name": "抵達河內內牌國際機場",
+          "duration": "1h",
+          "cost": 0,
+          "transport": "專車",
+          "note": "辦理團體落地簽證通關（請務必攜帶 2 吋照片 2 張）。"
+        },
+        {
+          "time": "12:00",
+          "name": "午餐：MAM MOM 越式風味單點吃到飽",
+          "meal": {
+            "name": "MAM MOM 越式風味單點吃到飽",
+            "cuisine": "越式風味",
+            "perPerson": 0,
+            "recommended": "特別加碼每人半隻龍蝦 (含茶水 + 每人一瓶啤酒或軟飲)",
+            "location": "河內市區"
+          }
+        },
+        {
+          "time": "13:30",
+          "name": "西湖 (West Lake) & 鎮國寺 (Trấn Quốc)",
+          "duration": "1.5h",
+          "cost": 0,
+          "transport": "專車/徒步",
+          "note": "【西湖】河內最美最大湖泊，面積達500公頃，紅河氾濫形成，過去為皇室富商最愛。【鎮國寺】六世紀黎朝建，位於西湖畔小半島，環境清雅，寺門有「鎮國古寺」四字，寺後有高僧墓地，為西湖邊最美古建築。"
+        },
+        {
+          "time": "15:00",
+          "name": "車遊巴亭廣場、胡志明陵寢、總督府、河內歌劇院",
+          "duration": "1h",
+          "cost": 0,
+          "transport": "車遊外觀",
+          "note": "【巴亭廣場】集會廣場，胡志明在此宣讀《獨立宣言》。【胡志明陵寢】越南國父安息地。【總督府】1906年歐式黃色建築。【河內歌劇院 Hanoi Opera House】1911年巴洛克風格建築，鵝黃外觀與法國越洋石磚，富法式浪漫氣息。"
+        },
+        {
+          "time": "16:00",
+          "name": "百年舊鐵道＋網美咖啡廳 (每人一杯茶/咖啡/蛋咖啡)",
+          "duration": "1.5h",
+          "cost": 0,
+          "transport": "徒步",
+          "note": "位於龍邊橋旁，可近距離品嚐河內聞名的「蛋咖啡」，欣賞百年舊鐵道風華與火車緩慢駛過的獨特視角。"
+        },
+        {
+          "time": "18:00",
+          "name": "專車前往府里(河南)",
+          "duration": "1h",
+          "cost": 0,
+          "transport": "專車",
+          "note": "前往河南入住 Melia Vinpearl Phu Ly 府里五星飯店。"
+        },
+        {
+          "time": "19:00",
+          "name": "晚餐：飯店內中越式料理合菜",
+          "meal": {
+            "name": "Meliá 酒店內中越式料理合菜",
+            "cuisine": "中越合菜",
+            "perPerson": 0,
+            "recommended": "精緻合菜料理 (含啤酒或軟飲每人一杯)",
+            "location": "Meliá Vinpearl Phu Ly"
+          }
+        }
+      ]
+    },
+    {
+      "date": "10/09",
+      "weekday": "週五",
+      "theme": "河南 → 舟遊陸龍灣長安保護區 → 華閭古都 → 下龍灣",
+      "weather": {
+        "icon": "partlyCloudy",
+        "high": 28,
+        "low": 22
+      },
+      "activities": [
+        {
+          "time": "08:30",
+          "name": "專車前往陸龍灣 (Hua Lu - Tam Coc)",
+          "duration": "1h",
+          "cost": 0,
+          "transport": "專車",
+          "note": "【陸龍灣】位於河內南方100多公里，為丁朝與黎朝國都，以石灰岩侵蝕地形（喀斯特地形）形成三個谷洞，河流平穩。"
+        },
+        {
+          "time": "09:30",
+          "name": "長安自然人文保護區 (四人一艘竹筏遊船)",
+          "duration": "2.5h",
+          "cost": 0,
+          "transport": "竹筏遊船",
+          "note": "【長安名勝群】素有『陸上下龍灣』美譽。搭乘竹筏蜿蜒於2168平方公里的保護區，穿越48個洞穴（開放7個），山澗矮樹倒映水面，清幽如畫。（返回請給船伕小費 20,000 VND 或 1 USD）。"
+        },
+        {
+          "time": "12:00",
+          "name": "午餐：PARADISE 寧平農家羊肉風味餐",
+          "meal": {
+            "name": "PARADISE 寧平農家羊肉風味餐",
+            "cuisine": "寧平農家菜",
+            "perPerson": 0,
+            "recommended": "在地特色羊肉風味 (含啤酒或軟飲每人一杯)",
+            "location": "寧平"
+          }
+        },
+        {
+          "time": "13:30",
+          "name": "華閭古都 (Hoa Lụ)",
+          "duration": "1.5h",
+          "cost": 0,
+          "transport": "專車/步行",
+          "note": "【華閭古都】越南丁朝(968-980年)及前黎朝(980-1009年)首都，第一個統一王朝之地。石灰岩山環繞，原址現存祭祀皇帝之廟宇。"
+        },
+        {
+          "time": "15:00",
+          "name": "專車前往下龍灣",
+          "duration": "3h",
+          "cost": 0,
+          "transport": "專車",
+          "note": "前往世界自然遺產「下龍灣」，入住 The Yacht Hotel by DC 五星酒店。"
+        },
+        {
+          "time": "18:30",
+          "name": "晚餐：漁村餐廳 越式海鮮料理",
+          "meal": {
+            "name": "漁村餐廳 越式海鮮料理",
+            "cuisine": "越式海鮮",
+            "perPerson": 0,
+            "recommended": "下龍灣在地海鮮饗宴 (含啤酒或軟飲每人一杯)",
+            "location": "下龍灣"
+          }
+        }
+      ]
+    },
+    {
+      "date": "10/10",
+      "weekday": "週六",
+      "theme": "下龍灣奢華海豚號日遊船 (6-7h) + 女皇纜車 & 太陽之眼摩天輪",
+      "weather": {
+        "icon": "sunny",
+        "high": 28,
+        "low": 21
+      },
+      "activities": [
+        {
+          "time": "10:30",
+          "name": "登接駁船前往 2025 全新海豚號 (Dolphin Cruise)",
+          "duration": "0.5h",
+          "cost": 0,
+          "transport": "接駁船",
+          "note": "【海豚號遊輪 Dolphin Cruise】2025年9月全新下水史詩級奢華日遊船，可容納近700人，配備世界級設施、燈光秀與DJ泳池派對。"
+        },
+        {
+          "time": "11:00",
+          "name": "享用迎賓飲料 & 登船手續",
+          "duration": "0.5h",
+          "cost": 0,
+          "transport": "遊船",
+          "note": "簡介船上設施與當日巡航行程。"
+        },
+        {
+          "time": "11:30",
+          "name": "午餐：Dolphin CRUISE 自助餐/套餐",
+          "meal": {
+            "name": "Dolphin CRUISE 自助餐或套餐",
+            "cuisine": "東西方精緻盛宴",
+            "perPerson": 0,
+            "recommended": "東方精緻與歐式豐盛海鮮交響盛宴 (不含酒水)",
+            "location": "海豚號船上"
+          }
+        },
+        {
+          "time": "12:30",
+          "name": "驚訝洞 (Sung Sot Cave)",
+          "duration": "1.5h",
+          "cost": 0,
+          "transport": "游船/徒步",
+          "note": "【驚訝洞 Sung Sot】下龍灣最大、最壯觀的溶洞，洞內擁有各種獨特奇妙的千年鐘乳石，氣勢磅礴。"
+        },
+        {
+          "time": "14:00",
+          "name": "穿洞 (Luon Cave)",
+          "duration": "1h",
+          "cost": 0,
+          "transport": "竹筏/獨木舟",
+          "note": "【穿洞 Luon Cave】封閉拱形山中的水上湖泊，極具特色。（可自費體驗當地人划竹筏或獨木舟進入）。"
+        },
+        {
+          "time": "15:00",
+          "name": "英雄島 (Ti Top Island)",
+          "duration": "1.5h",
+          "cost": 0,
+          "transport": "游船/攀登",
+          "note": "【英雄島 Ti Top】擁有美麗新月形沙灘，可戲水踏浪，或攀登420階梯至島頂俯瞰360度下龍灣全景。"
+        },
+        {
+          "time": "16:30",
+          "name": "甲板日落音樂派對 & 泳池時光",
+          "duration": "0.75h",
+          "cost": 0,
+          "transport": "遊船",
+          "note": "在甲板上享受DJ音樂派對與夕陽海灣美景。"
+        },
+        {
+          "time": "17:15",
+          "name": "返抵港口碼頭下船",
+          "duration": "0.5h",
+          "cost": 0,
+          "transport": "接駁船",
+          "note": "結束6~7小時的海豚號下龍灣海上巡禮。"
+        },
+        {
+          "time": "18:00",
+          "name": "下龍灣女皇雙層纜車 + 太陽之眼摩天輪",
+          "duration": "1h",
+          "cost": 0,
+          "transport": "纜車",
+          "note": "【女皇雙層纜車】越南 SUN GROUP 集團建造，金氏紀錄世界最大雙層纜車（載230人），5分鐘登 BA DEO 丘陵，銜接「太陽之眼摩天輪 Sun Wheel」俯瞰下龍灣夜景。"
+        },
+        {
+          "time": "19:30",
+          "name": "晚餐：GREEN HA LONG 九層蒸籠海鮮宴+火鍋",
+          "meal": {
+            "name": "GREEN HA LONG 九層蒸籠海鮮宴+火鍋",
+            "cuisine": "豪華海鮮火鍋",
+            "perPerson": 0,
+            "recommended": "震撼九層海鮮蒸籠與火鍋 (含啤酒或軟飲每人一杯)",
+            "location": "下龍灣"
+          }
+        }
+      ]
+    },
+    {
+      "date": "10/11",
+      "weekday": "週日",
+      "theme": "下龍灣 → 河內還劍湖 → 電瓶車遊 36 古街 → 西湖樂天購物中心 & 水族館",
+      "weather": {
+        "icon": "partlyCloudy",
+        "high": 29,
+        "low": 22
+      },
+      "activities": [
+        {
+          "time": "08:30",
+          "name": "專車返回河內",
+          "duration": "2.5h",
+          "cost": 0,
+          "transport": "專車",
+          "note": "返回河內市區。"
+        },
+        {
+          "time": "11:30",
+          "name": "午餐：新英豪餐廳中越式料理合菜",
+          "meal": {
+            "name": "新英豪餐廳中越式料理合菜",
+            "cuisine": "中越合菜",
+            "perPerson": 0,
+            "recommended": "中越特色合菜 (含啤酒或軟飲每人一杯)",
+            "location": "河內"
+          }
+        },
+        {
+          "time": "13:00",
+          "name": "還劍湖 (Hồ Hoàn Kiếm) & 聖若瑟大教堂",
+          "duration": "1h",
+          "cost": 0,
+          "transport": "徒步",
+          "note": "【還劍湖】湖名源自15世紀黎太祖借神劍擊退明軍後還劍給神龜之傳說。【聖若瑟大教堂】1886年哥德式建築，外觀酷似巴黎聖母院，內部彩繪玻璃華麗莊嚴。"
+        },
+        {
+          "time": "14:00",
+          "name": "三十六古街散策 (贈電瓶車)",
+          "duration": "1.5h",
+          "cost": 0,
+          "transport": "電瓶車",
+          "note": "【36古街】11世紀李王朝至今之古老商業區，等腰三角形分佈，古代36種行業各占一街，熱鬧非凡。（車程結束請給司機小費 20,000 VND）。"
+        },
+        {
+          "time": "16:00",
+          "name": "西湖樂天購物中心 Lotte Mall West Lake + 樂天水族館",
+          "duration": "3h",
+          "cost": 0,
+          "transport": "專車",
+          "note": "【Lotte Mall West Lake】東南亞最大購物中心，擁有233家商店與娛樂設施。特別贈送「樂天世界水族館門票」。"
+        },
+        {
+          "time": "19:00",
+          "name": "晚餐：樂天購物中心美食街（自由採購）",
+          "meal": {
+            "name": "樂天購物廣場美食街自理",
+            "cuisine": "自由選擇",
+            "perPerson": 0,
+            "recommended": "商場內233家時尚美食餐廳自由品嚐",
+            "location": "Lotte Mall"
+          }
+        }
+      ]
+    },
+    {
+      "date": "10/12",
+      "weekday": "週一",
+      "theme": "河內內牌機場 → 桃園國際機場 滿載珍貴回憶返台",
+      "weather": {
+        "icon": "sunny",
+        "high": 29,
+        "low": 22
+      },
+      "activities": [
+        {
+          "time": "08:30",
+          "name": "飯店享用早餐後專車前往機場",
+          "duration": "1h",
+          "cost": 0,
+          "transport": "專車",
+          "note": "專車前往河內內牌國際機場辦理出境與託運手續。"
+        },
+        {
+          "time": "11:30",
+          "name": "搭乘中華航空 CI 792 返台",
+          "duration": "2.83h",
+          "cost": 0,
+          "transport": "中華航空 CI 792 (11:30-15:20)",
+          "note": "搭乘華航直航班機，機上享用簡餐。"
+        },
+        {
+          "time": "15:20",
+          "name": "返抵桃園國際機場",
+          "duration": "0.5h",
+          "cost": 0,
+          "transport": "自理",
+          "note": "返抵桃園機場，結束愉快難忘的北越世界遺產優雅5日之旅。"
+        }
+      ]
+    }
+  ],
+  "hotels": [
+    {
+      "name": "Meliá Vinpearl Phu Ly",
+      "area": "河南府里",
+      "pricePerNight": 0,
+      "highlights": "五星飯店、設施完善、享用中越式合菜晚餐",
+      "rating": "5.0"
+    },
+    {
+      "name": "The Yacht Hotel by DC",
+      "area": "下龍灣",
+      "pricePerNight": 0,
+      "highlights": "下龍灣奢華五星酒店、連住兩晚、方便海豚號日遊船出海",
+      "rating": "5.0"
+    },
+    {
+      "name": "L7 WEST LAKE HANOI BY LOTTE",
+      "area": "河內西湖",
+      "pricePerNight": 0,
+      "highlights": "河內最新奢華五星酒店、緊鄰樂天購物中心與水族館",
+      "rating": "5.0"
+    }
+  ],
+  "budget": {
+    "transport": {
+      "items": [
+        {
+          "name": "桃園-河內華航來回機票 + 豪華空調巴士",
+          "cost": 0
+        }
+      ],
+      "subtotal": 0
+    },
+    "accommodation": {
+      "items": [
+        {
+          "name": "全程五星飯店雙人房 (4晚)",
+          "cost": 0
+        }
+      ],
+      "subtotal": 0
+    },
+    "food": {
+      "items": [
+        {
+          "name": "龍蝦單點吃到飽、寧平羊肉、海豚號自助餐、九層蒸籠海鮮宴",
+          "cost": 0
+        }
+      ],
+      "subtotal": 0
+    },
+    "tickets": {
+      "items": [
+        {
+          "name": "海豚號遊船、長安竹筏、女皇纜車+摩天輪、樂天水族館門票",
+          "cost": 0
+        }
+      ],
+      "subtotal": 0
+    },
+    "other": {
+      "items": [
+        {
+          "name": "領隊導遊司機小費 (NT$300/天x5天=NT$1500，已包含於團費中)",
+          "cost": 1500
+        }
+      ],
+      "subtotal": 1500
+    },
+    "total": 1500,
+    "perPerson": 1500
+  },
+  "tips": [
+    "氣候穿著與規範：短袖/薄長袖 + 薄外套 (特定景點需注重穿著規範) · 降水概率 20% · 參觀巴亭廣場、胡志明陵寢、鎮國寺等景點時不可穿著短褲、短裙或無袖上衣。",
+    "簽證資料：請務必攜帶 2 吋照片 2 張，辦理越南團體落地簽證。",
+    "小費禮儀：長安船伕小費每人 20,000 VND (或 1 USD)；36古街電瓶車司機小費每人 20,000 VND；飯店行李與床頭小費每件/每房 1 USD (或 20,000 VND)。領隊導遊司機小費每日 NT$300 已包含於團費中。",
+    "行李規定：託運行李限重 20kg；行動電源及備用鋰電池必須隨身攜帶，嚴禁託運；液體容器需小於 100ml 裝於 1L 透明塑膠袋中。",
+    "時差與電壓：越南時間比台灣慢 1 小時 (UTC+7)；電壓為 220V 雙孔圓形插座 (飯店多備有通用插座)。",
+    "禁帶物品：肉製品、生鮮水果、種子嚴禁攜帶回台，違者最高罰鍰 NT$100 萬。"
+  ],
+  "generationDate": "2026-09-29"
+};
+
+// SVG icon templates (inline, no external deps)
+const SVG = {
+  sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>',
+  cloud: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
+  cloudSun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M4.93 4.93l1.41 1.41M20 12h2M4 12H2M19.07 4.93l-1.41 1.41"/><circle cx="12" cy="9" r="4" opacity=".5"/><path d="M18 13h-1.26A7 7 0 0 0 6 15.26 5 5 0 1 0 9 23h9a5 5 0 0 0 0-10z"/></svg>',
+  rain: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 13V4a4 4 0 0 0-8 0v1H6a4 4 0 0 0 0 8h10a4 4 0 0 0 0-8Z"/><path d="M8 19v2M12 19v2M16 19v2"/></svg>',
+  storm: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><path d="m13 12-3 5h4l-3 5"/></svg>',
+  snow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><path d="M8 18l.01 0M12 18l.01 0M16 18l.01 0"/></svg>',
+  utensils: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>',
+  mapPin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  lightbulb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18h6M10 22h4M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>',
+  info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+  plane: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>',
+  hotel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M3 7v14M21 7v14M6 7V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v3"/><rect x="7" y="10" width="3" height="3" rx=".5"/><rect x="14" y="10" width="3" height="3" rx=".5"/><path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>',
+  ticket: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></svg>',
+  box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>',
+  checkCircle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+  chevDown: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>'
+};
+
+const weatherIcons = { sunny: SVG.sun, cloudy: SVG.cloud, rainy: SVG.rain, stormy: SVG.storm, snowy: SVG.snow, partlyCloudy: SVG.cloudSun, overcast: SVG.cloud };
+const budgetColors = { transport: '#0EA5E9', accommodation: '#8B5CF6', food: '#F97316', tickets: '#F43F5E', other: '#64748B' };
+const budgetIcons = { transport: SVG.plane, accommodation: SVG.hotel, food: SVG.utensils, tickets: SVG.ticket, other: SVG.box };
+const budgetLabels = { transport: '交通', accommodation: '住宿', food: '餐饮', tickets: '门票', other: '其他' };
+
+function renderWeather(weather, days) {
+  const bar = document.getElementById('weatherBar');
+  bar.innerHTML = days.map(d => {
+    const icon = weatherIcons[d.weather.icon] || SVG.cloudSun;
+    return `<div class="weather-card">
+      <div class="w-date">${d.date} ${d.weekday}</div>
+      <div class="w-icon" style="color:${d.weather.icon === 'sunny' ? '#F59E0B' : d.weather.icon === 'rainy' ? '#0EA5E9' : '#64748B'}">${icon}</div>
+      <div class="w-temp">${d.weather.high}° <span class="w-temp-low">/ ${d.weather.low}°</span></div>
+    </div>`;
+  }).join('');
+
+  const tip = document.getElementById('weatherTip');
+  tip.innerHTML = `<span class="icon" style="color:var(--primary)">${SVG.info}</span>
+    <span>${weather.clothing} · 降水概率 ${weather.rainfall} · ${weather.tips}</span>`;
+}
+
+function renderDays(days) {
+  const container = document.getElementById('daysContainer');
+  container.innerHTML = days.map((day, i) => {
+    const wIcon = weatherIcons[day.weather.icon] || SVG.cloudSun;
+    const acts = day.activities.map(a => {
+      const isMeal = a.meal || /[午晚早]餐/.test(a.name);
+      let html = `<div class="tl-item${isMeal ? ' is-meal' : ''}"><div class="tl-dot"></div>`;
+      html += `<div class="tl-time">${a.time}${a.duration ? ' · ' + a.duration : ''}</div><div class="tl-content">`;
+      html += `<h4>${a.name}</h4>`;
+      if (a.note) html += `<p>${a.note}</p>`;
+      const gmapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.name)}`;
+      html += `<div style="margin-top:4px;"><a href="${gmapUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:4px;font-size:0.75rem;color:var(--primary);text-decoration:none;font-weight:500;"><span class="icon icon-sm">${SVG.mapPin}</span> 在 Google 地圖導航</a></div>`;
+      if (a.meal) {
+        html += `<div class="meal-card">
+          <div class="meal-icon"><span class="icon">${SVG.utensils}</span></div>
+          <div class="meal-info">
+            <div class="meal-name">${a.meal.name}</div>
+            <div class="meal-detail">${a.meal.cuisine} · ${a.meal.location}${a.meal.recommended ? ' · 推荐：' + a.meal.recommended : ''}</div>
+          </div>
+          <div class="meal-price">¥${a.meal.perPerson}/人</div>
+        </div>`;
+      }
+      const tags = [];
+      if (a.cost === 0) tags.push(`<span class="tag tag-free">免费</span>`);
+      else if (a.cost) tags.push(`<span class="tag tag-cost">¥${a.cost}</span>`);
+      if (a.transport) tags.push(`<span class="tag tag-transport">${a.transport}</span>`);
+      if (tags.length) html += `<div class="tl-tags">${tags.join('')}</div>`;
+      html += `</div></div>`;
+      return html;
+    }).join('');
+
+    return `<div class="day-card">
+      <div class="day-header" tabindex="0" role="button" aria-expanded="true"
+           onclick="toggleDay(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDay(this)}">
+        <div class="day-header-left">
+          <div class="day-num">D${i + 1}</div>
+          <div class="day-header-info">
+            <h3>${day.theme}</h3>
+            <div class="day-meta">
+              <span>${day.date} ${day.weekday}</span>
+              <span style="display:inline-flex;align-items:center;gap:3px;color:${day.weather.icon === 'sunny' ? '#F59E0B' : '#64748B'}">
+                <span class="icon icon-sm">${wIcon}</span> ${day.weather.high}°/${day.weather.low}°
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="toggle-icon"><span class="icon icon-sm">${SVG.chevDown}</span></div>
+      </div>
+      <div class="day-body"><div class="timeline">${acts}</div></div>
+    </div>`;
+  }).join('');
+}
+
+function toggleDay(el) {
+  const card = el.closest('.day-card');
+  const expanded = !card.classList.contains('collapsed');
+  card.classList.toggle('collapsed');
+  el.setAttribute('aria-expanded', !expanded);
+}
+
+function renderHotels(hotels) {
+  document.getElementById('hotelGrid').innerHTML = hotels.map((h, i) => {
+    const tags = h.highlights.split(/[;；、,，]/).filter(Boolean).map(t => `<span class="hotel-tag">${t.trim()}</span>`).join('');
+    const priceDisplay = (h.pricePerNight && h.pricePerNight > 0)
+      ? `<span class="hotel-price">¥${h.pricePerNight}</span><span class="hotel-price-unit">/晚</span>`
+      : `<span style="color:var(--success);font-weight:600;font-size:0.88rem;display:inline-flex;align-items:center;gap:4px;"><span class="icon icon-sm">${SVG.checkCircle}</span> 團費包含（旅行社已付）</span>`;
+    return `<div class="hotel-card">
+      ${i === 0 ? '<div class="hotel-badge">五星奢華</div>' : ''}
+      <div class="hotel-name">${h.name}</div>
+      <div class="hotel-area"><span class="icon icon-sm" style="color:var(--accent)">${SVG.mapPin}</span>${h.area}</div>
+      <div class="hotel-price-row">${priceDisplay}</div>
+      <div class="hotel-highlights">${tags}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderBudget(budget) {
+  // Chart bar
+  const cats = Object.entries(budget).filter(([k]) => !['total', 'perPerson'].includes(k));
+  const total = budget.total || cats.reduce((s, [, d]) => s + d.subtotal, 0);
+  document.getElementById('budgetChart').innerHTML = cats.map(([cat, data]) =>
+    `<div class="budget-chart-seg" style="width:${(data.subtotal / total * 100).toFixed(1)}%;background:${budgetColors[cat] || '#94A3B8'}"></div>`
+  ).join('');
+
+  // Table
+  const tbody = document.querySelector('#budgetTable tbody');
+  tbody.innerHTML = cats.map(([cat, data]) => {
+    const icon = budgetIcons[cat] || SVG.box;
+    const label = budgetLabels[cat] || cat;
+    const subtotalText = data.subtotal > 0 ? `¥${data.subtotal.toLocaleString()}` : '團費包含';
+    let rows = `<tr class="cat-row"><td colspan="2"><span class="cat-icon"><span class="icon icon-sm" style="color:${budgetColors[cat]}">${icon}</span>${label}</span></td><td class="subtotal">${subtotalText}</td></tr>`;
+    data.items.forEach(item => {
+      const itemCostText = item.cost > 0 ? `¥${item.cost.toLocaleString()}` : '<span style="color:var(--success);font-weight:500;">團費包含 (旅行社已付)</span>';
+      rows += `<tr class="sub-row"><td></td><td>${item.name}</td><td>${itemCostText}</td></tr>`;
+    });
+    return rows;
+  }).join('');
+
+  // Total bar
+  const el = document.getElementById('budgetTotal');
+  el.querySelector('.budget-total-amount').textContent = `¥${total.toLocaleString()}`;
+  el.querySelector('.budget-total-per').textContent = `人均 ¥${(budget.perPerson || 0).toLocaleString()}`;
+}
+
+function renderTips(tips) {
+  document.getElementById('tipsList').innerHTML = tips.map(t =>
+    `<div class="tip-card"><div class="tip-icon"><span class="icon">${SVG.lightbulb}</span></div><span>${t}</span></div>`
+  ).join('');
+}
+
+function renderMap(days, hotels, activeDayIdx = 'all') {
+  if (typeof L === 'undefined') return;
+
+  if (!window.tripMapInstance) {
+    window.tripMapInstance = L.map('map').setView([20.85, 106.2], 9);
+    L.tileLayer('https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}&hl=zh-TW', {
+      maxZoom: 20,
+      subdomains: ['0', '1', '2', '3'],
+      attribution: 'Map data &copy; Google'
+    }).addTo(window.tripMapInstance);
+    window.mapMarkersGroup = L.featureGroup().addTo(window.tripMapInstance);
+  }
+
+  const map = window.tripMapInstance;
+  window.mapMarkersGroup.clearLayers();
+
+  const coordsMap = {
+    '鎮國寺': [21.0478, 105.8368],
+    '西湖': [21.0560, 105.8235],
+    '巴亭廣場': [21.0369, 105.8347],
+    '胡志明陵寢': [21.0369, 105.8347],
+    '總督府': [21.0385, 105.8355],
+    '歌劇院': [21.0244, 105.8576],
+    '舊鐵道': [21.0425, 105.8572],
+    '龍邊橋': [21.0425, 105.8572],
+    '府里': [20.5422, 105.9142],
+    '河南': [20.5422, 105.9142],
+    '長安': [20.2506, 105.9745],
+    '陸龍灣': [20.2506, 105.9745],
+    '華閭': [20.2839, 105.9056],
+    '海豚號': [20.9500, 107.0833],
+    '驚訝洞': [20.8741, 107.0847],
+    '穿洞': [20.8700, 107.0810],
+    '英雄島': [20.8683, 107.0805],
+    '女皇': [20.9560, 107.0700],
+    '摩天輪': [20.9580, 107.0720],
+    '下龍灣': [20.9500, 107.0833],
+    '還劍湖': [21.0287, 105.8523],
+    '聖若瑟': [21.0288, 105.8490],
+    '36古街': [21.0333, 105.8500],
+    '樂天': [21.0538, 105.8152]
+  };
+
+  const points = [];
+  const addedKeys = new Set();
+  const filteredDays = activeDayIdx === 'all' ? days : [days[activeDayIdx]];
+
+  filteredDays.forEach((d) => {
+    const dayNum = days.indexOf(d) + 1;
+    d.activities.forEach(a => {
+      let matchedCoord = null;
+
+      // 1. Match landmark name in activity title first
+      for (const [key, latlng] of Object.entries(coordsMap)) {
+        if (a.name.includes(key)) {
+          matchedCoord = latlng;
+          break;
+        }
+      }
+      // 2. If name didn't match, check specific landmark keys in note
+      if (!matchedCoord && a.note) {
+        for (const [key, latlng] of Object.entries(coordsMap)) {
+          if (!['河內', '下龍灣', '河南'].includes(key) && a.note.includes(key)) {
+            matchedCoord = latlng;
+            break;
+          }
+        }
+      }
+
+      if (matchedCoord) {
+        const coordKey = matchedCoord.join(',');
+        if (!addedKeys.has(coordKey)) {
+          addedKeys.add(coordKey);
+          points.push(matchedCoord);
+          const gmapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.name)}`;
+          const marker = L.marker(matchedCoord)
+            .bindPopup(`<b>D${dayNum} - ${a.name}</b><br>${a.note || ''}<br><a href="${gmapUrl}" target="_blank">Google 地圖開啟</a>`);
+          window.mapMarkersGroup.addLayer(marker);
+        }
+      }
+    });
+  });
+
+  if (points.length > 1) {
+    const polyline = L.polyline(points, {color: '#0EA5E9', weight: 4, opacity: 0.8, dashArray: '6, 8'});
+    window.mapMarkersGroup.addLayer(polyline);
+    map.fitBounds(window.mapMarkersGroup.getBounds(), {padding: [45, 45]});
+  } else if (points.length === 1) {
+    map.setView(points[0], 13);
+  }
+}
+
+function renderDayNav(days) {
+  const container = document.getElementById('dayNavPills');
+  let html = `<button class="nav-pill active" onclick="selectDayNav(this, 'all')"><span class="icon">${SVG.box}</span>全部行程</button>`;
+  days.forEach((d, i) => {
+    html += `<button class="nav-pill" onclick="selectDayNav(this, ${i})">DAY ${i + 1} (${d.date})</button>`;
+  });
+  container.innerHTML = html;
+}
+
+function selectDayNav(btn, dayIdx) {
+  document.querySelectorAll('#dayNavPills .nav-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const cards = document.querySelectorAll('#daysContainer .day-card');
+  if (dayIdx === 'all') {
+    cards.forEach(c => {
+      c.style.display = 'block';
+      c.classList.remove('collapsed');
+    });
+    renderMap(tripData.days, tripData.hotels, 'all');
+  } else {
+    cards.forEach((c, idx) => {
+      if (idx === dayIdx) {
+        c.style.display = 'block';
+        c.classList.remove('collapsed');
+      } else {
+        c.style.display = 'none';
+      }
+    });
+    renderMap(tripData.days, tripData.hotels, dayIdx);
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+if (tripData) {
+  const elTitle = document.getElementById('heroTitle');
+  if (elTitle) elTitle.textContent = tripData.title;
+  if (tripData.dateRange && document.getElementById('heroDate')) document.getElementById('heroDate').textContent = tripData.dateRange;
+  if (tripData.travelers && document.getElementById('heroTravelers')) document.getElementById('heroTravelers').textContent = tripData.travelers;
+  const elBudget = document.getElementById('heroBudget');
+  if (tripData.budget && elBudget) elBudget.textContent = `¥${(tripData.budget.total || 0).toLocaleString()}`;
+  if (document.getElementById('weatherBar')) renderWeather(tripData.weather, tripData.days);
+  renderDayNav(tripData.days);
+  renderDays(tripData.days);
+  if (document.getElementById('hotelGrid')) renderHotels(tripData.hotels);
+  if (document.getElementById('budgetTable')) renderBudget(tripData.budget);
+  renderTips(tripData.tips);
+  renderMap(tripData.days, tripData.hotels, 'all');
+}
+</script>
+</body>
+</html>
