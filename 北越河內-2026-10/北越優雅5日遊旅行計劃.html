@@ -212,7 +212,7 @@
   .meal-detail { font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .meal-price { font-weight: 700; color: var(--accent-dark); white-space: nowrap; font-size: 0.95rem; }
 
-  /* ---- Hotel Timeline Card (Enhanced for PDF integration) ---- */
+  /* ---- Hotel Timeline Card ---- */
   .hotel-timeline-card {
     background: linear-gradient(135deg, #FAF5FF 0%, #F5F3FF 100%);
     border: 1.5px solid #DDD6FE;
@@ -1196,7 +1196,6 @@ function renderTips(tips) {
 
 // Global Map Markers Map
 const coordsMap = {
-  // Landmarks
   '鎮國寺': [21.0478, 105.8368],
   '西湖': [21.0560, 105.8235],
   '巴亭廣場': [21.0369, 105.8347],
@@ -1226,7 +1225,6 @@ const coordsMap = {
   '機場': [21.2212, 105.8072]
 };
 
-// Hotel Coordinates & details from PDF
 const hotelDataList = [
   {
     name: 'Melia Vinpearl Phu Ly',
@@ -1284,7 +1282,7 @@ function renderMap(days, hotels, activeDayIdx = 'all') {
   filteredDays.forEach((d) => {
     const dayNum = days.indexOf(d) + 1;
     d.activities.forEach(a => {
-      if (a.isHotel) return; // Hotels are handled with custom hotel markers below
+      if (a.isHotel) return;
 
       let matchedCoord = null;
       for (const [key, latlng] of Object.entries(coordsMap)) {
@@ -1359,7 +1357,6 @@ function renderMap(days, hotels, activeDayIdx = 'all') {
   }
 }
 
-// Interactive Map Focus Helper
 window.focusMapLocation = function(lat, lng, name, address, tel) {
   const mapEl = document.getElementById('sec-map');
   if (mapEl) {
@@ -1369,14 +1366,12 @@ window.focusMapLocation = function(lat, lng, name, address, tel) {
   if (window.tripMapInstance) {
     window.tripMapInstance.setView([lat, lng], 15, { animate: true });
     
-    // Find matching marker and open popup
     const key = `${lat.toFixed(4)},${lng.toFixed(4)}`;
     if (window.markersStorage && window.markersStorage[key]) {
       setTimeout(() => {
         window.markersStorage[key].openPopup();
       }, 300);
     } else {
-      // Open transient popup
       const cleanTel = tel ? tel.replace(/[^0-9+]/g, '') : '';
       const gmapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}`;
       L.popup()
@@ -1429,6 +1424,8 @@ function selectDayNav(btn, dayIdx) {
 }
 
 if (tripData) {
+  if (document.getElementById('heroDate')) document.getElementById('heroDate').textContent = tripData.dateRange;
+  if (document.getElementById('heroTravelers')) document.getElementById('heroTravelers').textContent = tripData.travelers;
   if (document.getElementById('weatherBar')) renderWeather(tripData.weather, tripData.days);
   renderDayNav(tripData.days);
   renderDays(tripData.days);
