@@ -15,7 +15,11 @@
       "date": "10/08",
       "weekday": "週四",
       "theme": "桃園出發 → 河內西湖古剎 & 百年舊鐵道巡禮",
-      "weather": { "icon": "sunny", "high": 29, "low": 22 },
+      "weather": {
+        "icon": "sunny",
+        "high": 29,
+        "low": 22
+      },
       "activities": [
         {
           "time": "06:00",
@@ -86,6 +90,27 @@
             "recommended": "精緻合菜料理 (含啤酒或軟飲每人一杯)",
             "location": "Meliá Vinpearl Phu Ly"
           }
+        },
+        {
+          "time": "20:30",
+          "name": "住宿入住：Melia Vinpearl Phu Ly (府里五星飯店)",
+          "duration": "住宿1晚",
+          "cost": 0,
+          "transport": "專車抵達",
+          "isHotel": true,
+          "hotel": {
+            "name": "Melia Vinpearl Phu Ly",
+            "nameZh": "府里五星飯店 Meliá Vinpearl Phu Ly",
+            "tel": "+0226 3522-222",
+            "address": "60 Bien Hoa Street, Minh Khai Ward, Phu Ly, Ha Nam",
+            "area": "河南府里市中心",
+            "lat": 20.5455,
+            "lng": 105.9085,
+            "rating": "五星級",
+            "note": "河南府里市中心地標27層五星級酒店，附設健身中心、室內恆溫泳池與水療SPA，房內寬敞典雅。團費包含住宿與合菜晚餐。",
+            "gmapUrl": "https://www.google.com/maps/search/?api=1&query=Melia+Vinpearl+Phu+Ly"
+          },
+          "note": "【府里五星飯店 Melia Vinpearl Phu Ly】電話：+0226 3522-222。地址：60 Bien Hoa Street, Phu Ly, Ha Nam。河南府里地標五星級酒店，樓高27層視野開闊，配備健身中心與恆溫泳池，房內寬敞舒適。"
         }
       ]
     },
@@ -93,7 +118,11 @@
       "date": "10/09",
       "weekday": "週五",
       "theme": "河南 → 舟遊陸龍灣長安保護區 → 華閭古都 → 下龍灣",
-      "weather": { "icon": "partlyCloudy", "high": 28, "low": 22 },
+      "weather": {
+        "icon": "partlyCloudy",
+        "high": 28,
+        "low": 22
+      },
       "activities": [
         {
           "time": "08:30",
@@ -148,6 +177,27 @@
             "recommended": "下龍灣在地海鮮饗宴 (含啤酒或軟飲每人一杯)",
             "location": "下龍灣"
           }
+        },
+        {
+          "time": "20:00",
+          "name": "住宿入住：The Yacht Hotel by DC (下龍灣五星酒店 - 第1晚)",
+          "duration": "住宿1晚 (連住首晚)",
+          "cost": 0,
+          "transport": "專車抵達",
+          "isHotel": true,
+          "hotel": {
+            "name": "The Yacht Hotel by DC",
+            "nameZh": "下龍灣五星飯店 The Yacht Hotel by DC",
+            "tel": "+0203 3566-688",
+            "address": "258 Bai Chay, Bai Chay Ward, Ha Long City, Quang Ninh Province",
+            "area": "下龍灣白雀區",
+            "lat": 20.9575,
+            "lng": 107.0392,
+            "rating": "五星級",
+            "note": "下龍灣奢華五星級遊艇主題酒店，坐落於白雀中心商圈，連住兩晚免搬行李，方便明日出海搭乘海豚號日遊船。",
+            "gmapUrl": "https://www.google.com/maps/search/?api=1&query=The+Yacht+Hotel+by+DC+Ha+Long"
+          },
+          "note": "【下龍灣五星飯店 The Yacht Hotel by DC】電話：+0203 3566-688。地址：258 Bai Chay, Ha Long, Quang Ninh。奢華五星遊艇主題酒店，連住兩晚免收行李，方便出海海豚號日遊船。"
         }
       ]
     },
@@ -155,7 +205,11 @@
       "date": "10/10",
       "weekday": "週六",
       "theme": "下龍灣奢華海豚號日遊船 (6-7h) + 女皇纜車 & 太陽之眼摩天輪",
-      "weather": { "icon": "sunny", "high": 28, "low": 21 },
+      "weather": {
+        "icon": "sunny",
+        "high": 28,
+        "low": 21
+      },
       "activities": [
         {
           "time": "10:30",
@@ -242,6 +296,27 @@
             "recommended": "震撼九層海鮮蒸籠與火鍋 (含啤酒或軟飲每人一杯)",
             "location": "下龍灣"
           }
+        },
+        {
+          "time": "21:00",
+          "name": "住宿返回：The Yacht Hotel by DC (下龍灣五星酒店 - 第2晚)",
+          "duration": "住宿1晚 (連住第2晚)",
+          "cost": 0,
+          "transport": "專車/徒步",
+          "isHotel": true,
+          "hotel": {
+            "name": "The Yacht Hotel by DC",
+            "nameZh": "下龍灣五星飯店 The Yacht Hotel by DC",
+            "tel": "+0203 3566-688",
+            "address": "258 Bai Chay, Bai Chay Ward, Ha Long City, Quang Ninh Province",
+            "area": "下龍灣白雀區",
+            "lat": 20.9575,
+            "lng": 107.0392,
+            "rating": "五星級",
+            "note": "連住第二晚，享受五星酒店各項設施放鬆身心，回味白天下龍灣海上巡禮與女皇雙層纜車夜景。",
+            "gmapUrl": "https://www.google.com/maps/search/?api=1&query=The+Yacht+Hotel+by+DC+Ha+Long"
+          },
+          "note": "【下龍灣五星飯店 The Yacht Hotel by DC】電話：+0203 3566-688。地址：258 Bai Chay, Ha Long。連住下龍灣五星飯店第2晚，享受飯店設施與海灣浪漫夜景。"
         }
       ]
     },
@@ -249,7 +324,11 @@
       "date": "10/11",
       "weekday": "週日",
       "theme": "下龍灣 → 河內還劍湖 → 電瓶車遊 36 古街 → 西湖樂天購物中心 & 水族館",
-      "weather": { "icon": "partlyCloudy", "high": 29, "low": 22 },
+      "weather": {
+        "icon": "partlyCloudy",
+        "high": 29,
+        "low": 22
+      },
       "activities": [
         {
           "time": "08:30",
@@ -304,6 +383,27 @@
             "recommended": "商場內233家時尚美食餐廳自由品嚐",
             "location": "Lotte Mall"
           }
+        },
+        {
+          "time": "20:30",
+          "name": "住宿入住：L7 WEST LAKE HANOI BY LOTTE (河內西湖樂天五星飯店)",
+          "duration": "住宿1晚",
+          "cost": 0,
+          "transport": "專車/步行直通",
+          "isHotel": true,
+          "hotel": {
+            "name": "L7 WEST LAKE HANOI BY LOTTE",
+            "nameZh": "河內西湖樂天五星飯店",
+            "tel": "+024 3333-9000",
+            "address": "683 Lac Long Quan Street, Phu Thuong, Tay Ho District, Hanoi",
+            "area": "河內西湖樂天商圈",
+            "lat": 21.0715,
+            "lng": 105.8175,
+            "rating": "五星級",
+            "note": "韓國樂天集團2023年全新奢華五星酒店，緊鄰東南亞最大西湖樂天購物中心與水族館，俯瞰西湖美景，客房設施前衛奢華。",
+            "gmapUrl": "https://www.google.com/maps/search/?api=1&query=L7+WEST+LAKE+HANOI+BY+LOTTE"
+          },
+          "note": "【河內5星飯店 L7 WEST LAKE HANOI BY LOTTE】電話：+024 3333-9000。地址：683 Lac Long Quan, Tay Ho, Hanoi。2023全新五星奢華酒店，緊鄰樂天購物中心與水族館。"
         }
       ]
     },
@@ -311,7 +411,11 @@
       "date": "10/12",
       "weekday": "週一",
       "theme": "河內內牌機場 → 桃園國際機場 滿載珍貴回憶返台",
-      "weather": { "icon": "sunny", "high": 29, "low": 22 },
+      "weather": {
+        "icon": "sunny",
+        "high": 29,
+        "low": 22
+      },
       "activities": [
         {
           "time": "08:30",
@@ -336,21 +440,115 @@
           "cost": 0,
           "transport": "自理",
           "note": "返抵桃園機場，結束愉快難忘的北越世界遺產優雅5日之旅。"
+        },
+        {
+          "time": "15:20",
+          "name": "溫暖的家：返抵桃園國際機場，結束精彩旅程",
+          "duration": "返抵台灣",
+          "cost": 0,
+          "transport": "中華航空 CI 792",
+          "isHotel": false,
+          "note": "【住宿：溫暖的家】搭乘中華航空 CI 792 直航班機返抵台灣，滿載珍貴回憶，平安返回溫暖的家。"
         }
       ]
     }
   ],
   "hotels": [
-    { "name": "Meliá Vinpearl Phu Ly", "area": "河南府里", "pricePerNight": 0, "highlights": "五星飯店、設施完善、享用中越式合菜晚餐", "rating": "5.0" },
-    { "name": "The Yacht Hotel by DC", "area": "下龍灣", "pricePerNight": 0, "highlights": "下龍灣奢華五星酒店、連住兩晚、方便海豚號日遊船出海", "rating": "5.0" },
-    { "name": "L7 WEST LAKE HANOI BY LOTTE", "area": "河內西湖", "pricePerNight": 0, "highlights": "河內最新奢華五星酒店、緊鄰樂天購物中心與水族館", "rating": "5.0" }
+    {
+      "day": "Day 1 (10/08)",
+      "name": "Melia Vinpearl Phu Ly",
+      "nameZh": "府里五星飯店 Meliá Vinpearl Phu Ly",
+      "tel": "+0226 3522-222",
+      "address": "60 Bien Hoa Street, Minh Khai Ward, Phu Ly City, Ha Nam Province",
+      "area": "河南府里市中心",
+      "pricePerNight": 0,
+      "highlights": "五星飯店、地標27層建築、室內恆溫泳池、享用中越式合菜晚餐",
+      "rating": "5.0",
+      "coords": [
+        20.5455,
+        105.9085
+      ],
+      "gmapUrl": "https://www.google.com/maps/search/?api=1&query=Melia+Vinpearl+Phu+Ly"
+    },
+    {
+      "day": "Day 2 & Day 3 (10/09 ~ 10/10)",
+      "name": "The Yacht Hotel by DC",
+      "nameZh": "下龍灣五星飯店 The Yacht Hotel by DC",
+      "tel": "+0203 3566-688",
+      "address": "258 Bai Chay, Bai Chay Ward, Ha Long City, Quang Ninh Province",
+      "area": "下龍灣白雀區",
+      "pricePerNight": 0,
+      "highlights": "下龍灣奢華五星遊艇主題酒店、連住兩晚免搬行李、方便海豚號日遊船出海",
+      "rating": "5.0",
+      "coords": [
+        20.9575,
+        107.0392
+      ],
+      "gmapUrl": "https://www.google.com/maps/search/?api=1&query=The+Yacht+Hotel+by+DC+Ha+Long"
+    },
+    {
+      "day": "Day 4 (10/11)",
+      "name": "L7 WEST LAKE HANOI BY LOTTE",
+      "nameZh": "河內西湖樂天五星飯店",
+      "tel": "+024 3333-9000",
+      "address": "683 Lac Long Quan Street, Phu Thuong, Tay Ho District, Hanoi",
+      "area": "河內西湖商圈",
+      "pricePerNight": 0,
+      "highlights": "2023全新奢華五星酒店、緊鄰西湖樂天購物中心與水族館",
+      "rating": "5.0",
+      "coords": [
+        21.0715,
+        105.8175
+      ],
+      "gmapUrl": "https://www.google.com/maps/search/?api=1&query=L7+WEST+LAKE+HANOI+BY+LOTTE"
+    }
   ],
   "budget": {
-    "transport": { "items": [{ "name": "桃園-河內華航來回機票 + 豪華空調巴士", "cost": 0 }], "subtotal": 0 },
-    "accommodation": { "items": [{ "name": "全程五星飯店雙人房 (4晚)", "cost": 0 }], "subtotal": 0 },
-    "food": { "items": [{ "name": "龍蝦單點吃到飽、寧平羊肉、海豚號自助餐、九層蒸籠海鮮宴", "cost": 0 }], "subtotal": 0 },
-    "tickets": { "items": [{ "name": "海豚號遊船、長安竹筏、女皇纜車+摩天輪、樂天水族館門票", "cost": 0 }], "subtotal": 0 },
-    "other": { "items": [{ "name": "領隊導遊司機小費 (NT$300/天x5天=NT$1500，已包含於團費中)", "cost": 1500 }], "subtotal": 1500 },
+    "transport": {
+      "items": [
+        {
+          "name": "桃園-河內華航來回機票 + 豪華空調巴士",
+          "cost": 0
+        }
+      ],
+      "subtotal": 0
+    },
+    "accommodation": {
+      "items": [
+        {
+          "name": "全程五星飯店雙人房 (4晚)",
+          "cost": 0
+        }
+      ],
+      "subtotal": 0
+    },
+    "food": {
+      "items": [
+        {
+          "name": "龍蝦單點吃到飽、寧平羊肉、海豚號自助餐、九層蒸籠海鮮宴",
+          "cost": 0
+        }
+      ],
+      "subtotal": 0
+    },
+    "tickets": {
+      "items": [
+        {
+          "name": "海豚號遊船、長安竹筏、女皇纜車+摩天輪、樂天水族館門票",
+          "cost": 0
+        }
+      ],
+      "subtotal": 0
+    },
+    "other": {
+      "items": [
+        {
+          "name": "領隊導遊司機小費 (NT$300/天x5天=NT$1500，已包含於團費中)",
+          "cost": 1500
+        }
+      ],
+      "subtotal": 1500
+    },
     "total": 1500,
     "perPerson": 1500
   },
